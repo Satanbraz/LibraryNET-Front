@@ -1,0 +1,24 @@
+<div class="logo">
+    <div class="logoContainer" [ngClass]="{'logoContainerCollapsed' : isMenuCollapsed, 'logoContainerCollapsedNot': !isMenuCollapsed}">
+        @if (!isMenuCollapsed) {
+            <img src="https://ng.ant.design/assets/img/logo.svg" alt="logo">
+            <h1>MyLibrary</h1>
+        }
+        @else {
+            <h5 class="text-white">Library</h5>
+        }
+    </div>
+</div>
+<ul nz-menu nzTheme="dark" [nzMode]="'inline'" [nzInlineCollapsed]="isMenuCollapsed">
+    @for (menu of menuService.pagesMenu; track $index) {
+        <li nz-submenu nzOpen [nzTitle]="menu.group" nzIcon={{menu.icon}}>
+            <ul>
+                @for (item of menu.items; track $index) {
+                    <li nz-menu-item>
+                        <a [routerLink]="item.route">{{item.label}}</a>
+                    </li>
+                }
+            </ul>
+        </li>
+    }
+</ul>
